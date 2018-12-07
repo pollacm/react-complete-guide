@@ -336,4 +336,31 @@ bind
 	bind(this, 'Maximilian') 
 		"this" binds this to the class that it is in
 		second argument is what you are going to set it to
+Event Handlers
+		nameChangedHandler = (event) => {
+			this.setState({
+			  persons: [
+				{ name: 'Max', age: 28 },
+				{ name: event.target.value, age: 29 },
+				{ name: 'Stephanie', age: 26 },
+
+			]});
+		  }
+		  This extracts the target value of the event
+Adding Styling and Stylesheets
+	2 ways	
+		adding a .css file to the component folder (preferred; if possible)
+			is not scoped to the component. It's global. So you use the classname and add that to the component
+			By default, no file is included into the workflow by default. You have to include it 
+		inline styles
+			not global
+			creating a js constant with the style info in it
+				const style = {
+				  backgroundColor: 'whtte',
+				  font: 'inherit',
+				  border: '1px solid blue',
+				  padding: '8px'
+				};
+			Then setting the style of the element to that
+				<button style={style} onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button> {/*use bind if you can*/}
 	
