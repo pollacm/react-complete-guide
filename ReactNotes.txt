@@ -1,0 +1,339 @@
+Lesson 2
+	React is a Javascript Library for building user interfaces.
+Adding the right version of react to your site
+	Currently, there seems to be a bug if you add React as shown in the next video.
+
+	To fix it, replace the automatically added import paths (you'll see what I mean) with these:
+
+	https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js 
+
+	https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js 
+
+	This should fix. And don't worry about the React version, the entire rest of the course uses 16+ :)
+codepen.io
+	create new pen
+	Use Babel as a pre-processor
+	add both react, react-dom to use react
+	write in the format
+		function Person (props) {
+		  return (
+			<div className="person">
+			  <h1>{props.name}</h1>
+			  <p>Your Age: {props.age}</p>
+			</div>
+		  );
+		}
+
+		var app = (
+		  <div>
+			<Person name="Max" age="28" />
+			<Person name="Manu" age="31" />
+		  </div>
+		);
+
+		ReactDOM.render(app,
+		document.querySelector('#app'));
+Why react?
+	UI State is difficult to handle with vanilla JS
+		Have to manually target elements in the dom when using queryselector or jquery etc
+		complex apps where you add/remove elements, this becomes very cumbersome
+		Makes this a non issue
+	Focus more on business logic and not error cases
+	Huge ecosystem, active community and high performance
+React Alternatives
+	Angular
+	Vue.js
+	Amber
+Useful links
+	You shouldn't need it right now - but in case you ever want to dive in, here's the official React documenation: https://reactjs.org/
+	Had issues with the Codepen demo? Here's the finished source code: https://codepen.io/anon/pen/MELQaQ
+Next-Gen JS
+		let and const
+			different ways of creating variables
+			var
+				const
+					never changes
+					constant value
+				let 
+					variable values
+					value that changes
+		jsbin.com
+			another web editor that lets you input some js and see some output
+		Arrow functions
+			different syntax for creating js functions
+			normal function
+				function myFunc() {
+					...
+				}
+			arrow syntax
+				const myFnc - () => {
+					...
+				}
+			no more issues with the "this" keyword
+				Always keeps its context and doesn't ever change at runtime.
+		Exports and Imports (Modules)
+			can import content from another file
+				person.js	
+					const person = {
+						name: 'Max'
+					};
+					
+					export default person
+				utility.js
+					export const clean = () => {...}
+					export const baseData = 10;
+					
+				app.js
+					import person from './person.js'
+						imports defaul and ONLY export of the file name in the receiving file is up to you
+					import prs from './person.js'
+						imports default and ONLY export of the file name in the receiving file is up to you
+					
+					import { baseData } from './utility.js'
+						need to use curly braces and specify the exact name of the thing that we want to pull
+					import { clean } from './utility.js'
+						need to use curly braces and specify the exact name of the thing that we want to pull
+					import { baseData, clean } from './utility.js'
+			variations
+				default export
+					import { clean as cln } from './utility.js'
+					import * as bundled from './utility.js'
+						bundled.baseData
+						bundled.clean
+		Classes
+			inheritance
+				when using inheritance
+				
+				class Human {
+				  constructor(){
+					this.gender = 'male'
+				  }
+				  
+				  printGender(){
+					console.log(this.gender);
+				  }
+				  
+				}
+
+				class Person extends Human {
+				  constructor() {
+					super(); //you must use this to initialize the parent class when using inheritance
+					this.name = 'Max';
+				  }
+				  
+				  printMyName () {
+					console.log(this.name);
+				  }  
+				}
+
+				const person = new Person();
+				person.printMyName();
+				person.printGender();
+	Classes, Properties, and Methods
+		ES6
+			constructor() {
+				this.propertyValue = 'value'			
+			}
+			
+			myMethod() {...}
+		ES7
+			propertyValue = 'value'
+			myMethod = () => {...}
+		
+		Change above code to ES7
+			Change the Javascript dropdown in jsbin to ES6/Babel
+				class Human {
+				  gender = 'male';
+				  
+
+				  printGender = () => {
+					console.log(this.gender);
+				  }
+				}
+
+				class Person extends Human {
+				  name = 'Max';
+
+				  printMyName = () =>  {
+					console.log(this.name);
+				  }  
+				}
+
+				const person = new Person();
+				person.printMyName();
+				person.printGender();
+	Spread & Rest Operators
+		...
+		depends on where you use it to determine what you call it
+		Spread
+			used to split up array elements OR object properties
+				const newArray = [...oldArray, 1, 2] //takes the contents of oldArray and adds 1 and 2 to it and populates that result into newArray
+				const newObject = {...oldObject, newProp: 5} //takes the oldObject and adds newProp to it as a key/value pair.. if it already has a newProp, our property takes precidence.
+			Example
+				const numbers = [1, 2, 3];
+				const newNumbers = [...numbers, 4];
+
+				console.log(newNumbers);
+		Rest
+			used to merge a list of function arguments into an array
+				function sortArgs(...args) {
+					return args.sort();
+				}
+			Example 1
+				const person = {
+				  name: 'Max'
+				  
+				}
+
+				const newPerson = {
+				  ...person,
+				  age: 28
+				  
+				}
+
+				console.log(newPerson);
+			Example 2
+				const filter = (...args) => {
+				  return args.filter(el => el === 1);  
+				}
+
+				console.log(filter(1,2,3));
+	Destructuring
+		easily extract single array elements or object properties and store them in variables
+			Array destructuring
+				[a, b] = ['Hello', 'Max']
+				console.log(a) //Hello
+				console.log(b) //Max
+				Example
+					const numbers = [1, 2, 3];
+					[num1, num2] = numbers;
+					[num1a, , num3] = numbers;
+
+					console.log(num1, num2);
+					console.log(num1a, num3);
+			Object destructuring
+				{name} = {name: 'Max', age: 28}
+				console.log(name) //'Max'
+				console.log(age) //undefined
+	Copying an object vs pointing to the reference
+		if you point to the reference, then modify the original object, the new object will get the object of the original
+		if you copy an object, then modify the original object, the new object will retain it's value once it was copied
+	Refreshing array functions	
+		map
+			const numbers = [1, 2, 3];
+
+			const doubledArray = numbers.map((num) => {
+			  return num * 2;
+			});
+
+			console.log(numbers);
+			console.log(doubledArray);
+Build Workflow
+	Optimize Code
+	Use next-gen js features
+	Be more productive
+	Use Dependency Management tool (npm)
+	Use Bundler to bundle our code to run on all browsers (webpack)
+	Use compiler for next gen js (babel + pre-sets)
+	Use a local development server
+	-There is a tool for this created by React to get a base project
+Create React App repo. download the repo
+	npm install create-react-app -g
+	In the folder that you want to install, 
+		create-react-app react-complete-guide
+Basic Folder structure
+	packages.json
+		general dependencies
+	node-modules
+		holds all dependencies and sub dependencies for a project
+		Automatically updated when you run npm install in your project folder
+	public folder
+		index.html
+			our single html page for our project.
+			where our script file gets injected 
+				<div id="root"> where you actually mount our application
+			where all meta-tags are added etc
+		manifest.json
+			has some meta data defined for the application
+	source folder
+		react application
+		index.js
+			ReactDOM.render on the root which is triggered in public/index.html
+			Renders App and imports App from..
+		App.js
+			this is the rendered first react component
+		App.css
+			defines stylings in App.js
+				are not scoped to the App.js. it is a global styling.
+		Index.css
+			also applies styling globally
+		registerServiceWorker
+			pre-caches all of our script files. Leave this alone
+		.test.js
+			allows us to create tests
+Understanding basic components
+	Typically, you render one root component, the App component
+		you would nest all other components your application might need
+		those components can be nested there as well
+	Your components extend component.. with a render method
+	Every react component HAS TO return or render some html code that displays to the screen
+	Export the App class with default
+		just means when you import the class, you get the default set up
+	the jsx in the js file (looks like html) is the syntactic sugar to write "html"
+		is equivelant to React.createElement([elementYouWantToRender], [JavascriptObject], [textForElement]);
+		return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app'));
+		equals
+			<div className="App">
+				<h1>Hi, I'm a react app</h1>
+		    </div>
+JSX Restrictions
+	since the html is actually javascript
+		class can't be used
+		must have one root element
+			is laxed in a later version, but it should be considered best practice
+Creating an functional component
+	New folder components and component file start with a capital letter by convention
+	can omit '.js' extensions from imports. It is added automatically	
+	By convention object should start with upper case characters; lowercase elements are reserved for lowercase character in jsx
+Functional components 
+	also referred to as "presentational", "dumb" or "stateless" components 
+		const cmp = () => { return <div>some JSX</div> } 
+		using ES6 arrow functions as shown here is recommended but optional
+class-based components
+	also referred to as "containers", "smart" or "stateful" components
+		class Cmp extends Component { render () { return <div>some JSX</div> } } 
+To pass things to you component, use props
+		const person = (props) => {
+			return <p>I'm {props.name} and I am {props.age} years old!</p>
+		}
+	for functional you can use {props.Name}
+	for class components use {this.props.Name}
+	To access what is inside the html element
+		<Person name="Manu" age="26">My Hobbies: Racing</Person>
+			use {props.children}
+Managing state
+	is only available when extending components and is only available in class components
+	you should use state with care, because using it too often makes your app unpredictable and difficult to manage
+	the special thing about state (and props) is if it changes it tells react to update the dom
+Handling Events and Methods
+	use "Handler" at the post-fix of you method to let the reader know that it is an event handler
+	in your onClick
+		adding onClick={this.myEventHandler()} would execute immediately (adding ()).		
+			Dont add it if you want to do this
+		unless you execute it as a function
+			onClick={() => this.myEventHandler()}
+			dont use this if you don't have to because it can be inefficient. Use the bind syntax instead
+https://reactjs.org/docs/events.html#supported-events
+	Gives a list of types of events that can be listened to from react
+State
+	You cannot change state directly. You need to use this.setState
+	will merge whatever you define with the existing data. Will only update the vales that you specified
+	most components should not allow for changing of the application state
+		also known as a container
+You can pass event listeners and methods in the props as well to child components
+	You can change the state from children by doing this and having the actual change in the container 
+bind
+	bind(this, 'Maximilian') 
+		"this" binds this to the class that it is in
+		second argument is what you are going to set it to
+	
