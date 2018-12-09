@@ -363,4 +363,12 @@ Adding Styling and Stylesheets
 				};
 			Then setting the style of the element to that
 				<button style={style} onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button> {/*use bind if you can*/}
-	
+Userful Links
+	create-react-app: https://github.com/facebookincubator/create-react-app
+	Introducing JSX: https://reactjs.org/docs/introducing-jsx.html
+	Rendering Elements: https://reactjs.org/docs/rendering-elements.html
+	Components & Props: https://reactjs.org/docs/components-and-props.html
+	Listenable Events: https://reactjs.org/docs/events.html
+Rendering lists and conditional content
+	Can conditionally render content by adding a ternary expression
+		wrap the conditional code block in "this.state.showPersons ? <div>...</div> :  null"

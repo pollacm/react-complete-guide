@@ -2,7 +2,7 @@ import React from 'react'
 
 const userInput = (props) => {
     const style = {
-        height: '24px'
+        border: '2px solid red'
     };
 
     return(
