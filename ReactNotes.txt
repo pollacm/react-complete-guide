@@ -364,3 +364,20 @@ Adding Styling and Stylesheets
 			Then setting the style of the element to that
 				<button style={style} onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button> {/*use bind if you can*/}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+When cloning objects, use the spread operator
+	const person  = {...this.state.persons[personIndex]};
+	//const person2 = Object.assign({}, this.state.persons[personIndex]);
+	
+	
+	
