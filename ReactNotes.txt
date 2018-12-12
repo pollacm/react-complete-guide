@@ -372,3 +372,29 @@ Userful Links
 Rendering lists and conditional content
 	Can conditionally render content by adding a ternary expression
 		wrap the conditional code block in "this.state.showPersons ? <div>...</div> :  null"
+	Place them into a variable.
+		let persons = null;
+		if(...){ persons = (<div>blah</div>)};
+	Put decision points into a variable
+Outputting lists
+	Map them to a jsx object
+		{this.state.persons.map((person, index) => {
+            return <Person 
+
+                    name={person.name}
+                    age={person.age} 
+                    click={this.deletePersonHandler}/>
+          })}
+Always update state in an immutable fashion
+	// const persons = this.state.persons.slice(); //OR
+    const persons = [...this.state.persons]; //ES6 version spread operator
+    persons.splice(personIndex, 1);
+    this.setState({
+      persons: persons
+    });
+When cloning objects, use the spread operator
+	const person  = {...this.state.persons[personIndex]};
+	//const person2 = Object.assign({}, this.state.persons[personIndex]);
+	
+	
+	
