@@ -82,7 +82,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'whtte',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -104,6 +105,8 @@ class App extends Component {
           })}          
         </div>
       );
+
+      style.backgroundColor = 'red';
     }
 
     const charList = this.state.characters.split('').map((character, index) => {
@@ -117,12 +120,16 @@ class App extends Component {
       <div className="App">
         <h1>This is a react app!!!</h1>
         <p>This is really working</p>
-        <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
+        {/* <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
         <p>{this.state.characters.length}</p>
         <Validation textLength={this.state.characters.length} />
-        {charList}
-        <button style={style} onClick={() => this.showPersonHandler()}>Show Person</button> {/*use bind if you can*/}         
+        {charList} */}
+
+        <button 
+          style={style} 
+          onClick={() => this.showPersonHandler()}>Show Person</button> {/*use bind if you can*/}         
         {persons}
+
         {/* <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} 

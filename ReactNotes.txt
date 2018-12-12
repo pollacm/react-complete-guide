@@ -395,6 +395,11 @@ Always update state in an immutable fashion
 When cloning objects, use the spread operator
 	const person  = {...this.state.persons[personIndex]};
 	//const person2 = Object.assign({}, this.state.persons[personIndex]);
-	
-	
-	
+Useful Resources and links
+	Conditional Rendering: https://reactjs.org/docs/conditional-rendering.html
+	Lists & Keys: https://reactjs.org/docs/lists-and-keys.html
+Styling React Components (Deep Dive)
+	How to handle pseudo selectors (hover, visited,etc)
+		When using inline styles, you can just modify the js object for style
+			style.backgroundColor = 'red';
+	Setting class names dynamically
