@@ -17,8 +17,7 @@ class App extends Component {
     otherState: 'some other value',
     username: 'Jeff',
     showPersons: false,
-    textLength: 0,
-    characters: ''.split('')
+    characters: ''
   }
 
   switchNameHandler = (newName) => {
@@ -69,16 +68,15 @@ class App extends Component {
 
   textLengthChangeHandler = (event) => {
     this.setState({
-      textLength: event.target.value.length,
-      characters: event.target.value.split('')
+      characters: event.target.value
     });
   }
 
   characterClickHandler = (indexOfCharacter) => {
-    var characters = [...this.state.characters];
+    var characters = [...this.state.characters.split('')];
     characters.splice(indexOfCharacter, 1);
     this.setState({
-      characters: characters
+      characters: characters.join('')
     });
   }
 
@@ -108,23 +106,21 @@ class App extends Component {
       );
     }
 
+    const charList = this.state.characters.split('').map((character, index) => {
+      return <Character 
+        character={character}
+        key={index} 
+        click={() => this.characterClickHandler(index)}></Character>
+    });
+
     return (
       <div className="App">
         <h1>This is a react app!!!</h1>
         <p>This is really working</p>
-        <input type="text" onChangeCapture={this.textLengthChangeHandler} />
-        <p>{this.state.textLength}</p>
-        <Validation textLength={this.state.textLength} />
-        {this.state.characters.map((character, index) => {
-          return <Character 
-            character={character}
-            key={index} 
-            click={() => this.characterClickHandler(index)}></Character>
-        })}
-        
-        
-        
-
+        <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
+        <p>{this.state.characters.length}</p>
+        <Validation textLength={this.state.characters.length} />
+        {charList}
         <button style={style} onClick={() => this.showPersonHandler()}>Show Person</button> {/*use bind if you can*/}         
         {persons}
         {/* <Person 

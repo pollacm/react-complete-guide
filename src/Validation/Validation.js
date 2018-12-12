@@ -3,10 +3,10 @@ import React from 'react'
 const validation = (props) => {
     const maxPropLength = 10;
     const minPropLength = 3;
-    let jsx = null;
+    let validationMessage = null;
 
     if(props.textLength < minPropLength) {
-        jsx = (
+        validationMessage = (
             <div>
                 Text Length is too short
             </div>
@@ -15,14 +15,14 @@ const validation = (props) => {
     }
 
     if(props.textLength > maxPropLength) {
-        jsx = (
+        validationMessage = (
             <div>
                 Text Length is too long
             </div>
         );
     }
 
-    return jsx;
+    return validationMessage;
 }
 
 export default validation;
