@@ -403,3 +403,55 @@ Styling React Components (Deep Dive)
 		When using inline styles, you can just modify the js object for style
 			style.backgroundColor = 'red';
 	Setting class names dynamically
+		const classes = []; //red bold
+		if(this.state.persons.length <= 2){
+		  classes.push('red');
+		}
+		if(this.state.persons.length <= 1) {
+		  classes.push('bold');
+		}
+		
+		<p className={classes.join(' ')}>This is really working</p>
+	Adding and Using Radium
+		Can't assign a pseudo selector or media queries in application (just in css, but this makes it globally scoped)
+		Can add a third party package that will allow it
+			npm install --save radium
+				import into the file that you want to use it
+					import Radium from 'radium';
+			You need to wrap your app with Radium
+				export default Radium(App);
+				This is called a higher level component. This injects extra functionality into your application/component
+			To use for pseudo selectors...
+				const style = {
+				  backgroundColor: 'green',
+				  color: 'white',
+				  font: 'inherit',
+				  border: '1px solid blue',
+				  padding: '8px',
+				  cursor: 'pointer',
+				  ':hover': {
+					backgroundColor: 'lightgreen',
+					color: 'black'
+				  } 
+				};
+			To re-assign to pseudo selectors...
+				style[':hover'] =   {
+					backgroundColor: 'lightred',
+					color: 'black'
+				  } 
+			Media Queries
+				Need to wrap root application for things that are transforming the app
+					import Radium, {StyleRoot} from 'radium';
+				Then the entire div in the app root 
+					<StyleRoot>
+						<div className="App">
+						...
+						</div>
+					</StyleRoot>
+				const style = {
+					'@media (min-width: 500px)': {
+						width: '450px'
+					}
+				};
+				Then just add to style prop as normal
+					<div className="Person" style={style}>

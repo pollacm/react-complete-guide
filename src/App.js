@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
-import UserInput from './UserInput/UserInput'
-import UserOutput from './UserOutput/UserOutput'
-import Validation from './Validation/Validation'
-import Character from './Char/Char'
+import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
+import Validation from './Validation/Validation';
+import Character from './Char/Char';
+import Radium from 'radium';
 
 class App extends Component {
 
@@ -87,7 +88,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      } 
     };
 
     let persons = null;
@@ -107,6 +112,10 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
+      style[':hover'] =   {
+        backgroundColor: 'salmon',
+        color: 'black'
+      } 
     }
 
     const charList = this.state.characters.split('').map((character, index) => {
@@ -116,10 +125,18 @@ class App extends Component {
         click={() => this.characterClickHandler(index)}></Character>
     });
 
+    const classes = []; //red bold
+    if(this.state.persons.length <= 2){
+      classes.push('red');
+    }
+    if(this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+
     return (
       <div className="App">
         <h1>This is a react app!!!</h1>
-        <p>This is really working</p>
+        <p className={classes.join(' ')}>This is really working</p>
         {/* <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
         <p>{this.state.characters.length}</p>
         <Validation textLength={this.state.characters.length} />
@@ -160,4 +177,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
