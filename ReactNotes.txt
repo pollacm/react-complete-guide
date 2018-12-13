@@ -461,3 +461,4 @@ Styling React Components (Deep Dive)
 		To get access to this configuration we run npm eject
 			**there is no way back after this has been done
 		Converts an "everything is managed for me" project to an "everything is managed for me except the configuration" project
+		Need to have all changes committed and pushed before running the eject command. it will not work otherwise
