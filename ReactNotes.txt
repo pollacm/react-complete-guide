@@ -455,3 +455,9 @@ Styling React Components (Deep Dive)
 				};
 				Then just add to style prop as normal
 					<div className="Person" style={style}>
+	CSS Modules
+		Making the xxx.cs files scoped to the cooresponding js components
+			To do this we need to tweak the build configuration of our project
+		To get access to this configuration we run npm eject
+			**there is no way back after this has been done
+		Converts an "everything is managed for me" project to an "everything is managed for me except the configuration" project

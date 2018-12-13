@@ -5,7 +5,7 @@ import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 import Validation from './Validation/Validation';
 import Character from './Char/Char';
-import Radium, {StyleRoot} from 'radium';
+// import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
 
@@ -134,49 +134,49 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>This is a react app!!!</h1>
-          <p className={classes.join(' ')}>This is really working</p>
-          {/* <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
-          <p>{this.state.characters.length}</p>
-          <Validation textLength={this.state.characters.length} />
-          {charList} */}
+      // <StyleRoot>
+      <div className="App">
+        <h1>This is a react app!!!</h1>
+        <p className={classes.join(' ')}>This is really working</p>
+        {/* <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>
+        <p>{this.state.characters.length}</p>
+        <Validation textLength={this.state.characters.length} />
+        {charList} */}
 
-          <button 
-            style={style} 
-            onClick={() => this.showPersonHandler()}>Show Person</button> {/*use bind if you can*/}         
-          {persons}
+        <button 
+          style={style} 
+          onClick={() => this.showPersonHandler()}>Show Person</button> {/*use bind if you can*/}         
+        {persons}
 
-          {/* <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age} 
-            click={this.switchNameHandler.bind(this, 'Max!')} />
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age} 
-            click={this.switchNameHandler} 
-            changed={this.nameChangedHandler}>This is awesome</Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age} 
-            click={this.switchNameHandler} /> */}
-          
-          {/* <UserInput
-            change={this.userInputChangeHandler}
-            username={this.state.username}
-          />
+        {/* <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} 
+          click={this.switchNameHandler.bind(this, 'Max!')} />
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age} 
+          click={this.switchNameHandler} 
+          changed={this.nameChangedHandler}>This is awesome</Person>
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age} 
+          click={this.switchNameHandler} /> */}
+        
+        {/* <UserInput
+          change={this.userInputChangeHandler}
+          username={this.state.username}
+        />
 
-          <UserOutput
-            username={this.state.username} />
-          <UserOutput
-            username={this.state.username} />
-          <UserOutput
-            username={this.state.username} />*/}
-        </div> 
-      </StyleRoot>
+        <UserOutput
+          username={this.state.username} />
+        <UserOutput
+          username={this.state.username} />
+        <UserOutput
+          username={this.state.username} />*/}
+      </div>       
     );
   }
 }
 
-export default Radium(App);
+// export default Radium(App);
+export default App;
