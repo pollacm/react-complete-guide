@@ -462,3 +462,45 @@ Styling React Components (Deep Dive)
 			**there is no way back after this has been done
 		Converts an "everything is managed for me" project to an "everything is managed for me except the configuration" project
 		Need to have all changes committed and pushed before running the eject command. it will not work otherwise
+		run "npm run eject" in the command window
+			WebPack is the tool responsible for css in folders being global
+		In webpack.config.dev file, add "modules: true," and "localIdentName: '[name]__[local]__[hash:base64:5]'" near the test:/\.css#/ command
+			{
+			  test: cssRegex,
+			  exclude: cssModuleRegex,
+			  use: getStyleLoaders({
+				  importLoaders: 1,
+				  modules: true,
+				  localIdentName: '[name]__[local]__[hash:base64:5]'
+			  }),
+			}
+		copy that configuration to webpack.config.prod
+		Now when we import files, it is scoped to its components
+			the in the class that you are using styles, change
+				import './App.css' to import classes from './App.css';
+					then it can be used as an object with the css properties able to be used as objects
+						.App { width: 450px; } 
+							use like <civ className={classes.App}>
+							Will generate something like <div class="Post__Post__ah5_1">...</div>
+		When doing these changes, you have to restart the project in npm
+		Still a relatively new concept, you can learn more about CSS Modules
+			 https://github.com/css-modules/css-modules
+		If you still want to make a style global, you can by using the below in you css file
+			:global .Post { ... } 
+		For pseudo selectors:
+			define in the css class and apply to the sub-selector when you use things like 'button' or 'button.Red'
+		Media Queries
+			do it in css as well
+		More reference links
+			Using CSS Modules in create-react-app Projects: https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2
+			More information about CSS Modules: https://github.com/css-modules/css-modules
+Debugging
+	always scroll up to the top of the error messages to get an idea of what happened
+	even if the message itself is cryptic, it should give you a line number for a place to start
+	Logical errors
+		use the chrome developer tools and dig into localhost/static/js/src to get to the file and step through
+		Developer tools allows you to debug the code you wrote, even though it is not the compiled version of code running in the browsers
+	React Developer tools. Add to chrome, then React should show up in the tab
+		helps tell you the current state of different elements in the app
+	Error Boundaries
+		
