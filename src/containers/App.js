@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
-import Validation from './Validation/Validation';
-import Character from './Char/Char';
+import Person from '../components/Persons/Person/Person';
+import UserInput from '../components/UserInput/UserInput';
+import UserOutput from '../components/UserOutput/UserOutput';
+import Validation from '../components/Validation/Validation';
+import Character from '../components/Char/Char';
 // import Radium, {StyleRoot} from 'radium';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
 
@@ -101,12 +102,11 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-            key={person.id}
+            return <ErrorBoundary key={person.id}><Person             
             name={person.name} 
             age={person.age} 
             click={() => this.deletePersonHandler(index)}
-            changed={(event) => this.nameChangedHandler(event, person.id)}></Person>
+            changed={(event) => this.nameChangedHandler(event, person.id)}></Person></ErrorBoundary>
           })}          
         </div>
       );

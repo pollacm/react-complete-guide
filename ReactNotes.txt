@@ -398,6 +398,7 @@ When cloning objects, use the spread operator
 Useful Resources and links
 	Conditional Rendering: https://reactjs.org/docs/conditional-rendering.html
 	Lists & Keys: https://reactjs.org/docs/lists-and-keys.html
+	Keys always have to be on the outer div of the list in a map method
 Styling React Components (Deep Dive)
 	How to handle pseudo selectors (hover, visited,etc)
 		When using inline styles, you can just modify the js object for style
@@ -503,4 +504,21 @@ Debugging
 	React Developer tools. Add to chrome, then React should show up in the tab
 		helps tell you the current state of different elements in the app
 	Error Boundaries
-		
+		higher order components used for handling errors a component might throw
+		code that might fail at runtime; show a custom error message to the user
+		extends Component 
+			override componentDidCatch and set state = {hasError: false, errorMessage: ''}
+			handle this.hasErrors = true in the render
+		import it in the container component and wrap the component with the error boundary
+		in your component throw the error when needed
+			throw new Error("Something went wrong");   
+		In development mode, you will see the error in an "Error: Something went wrong" window.
+			In production this wont happen. It will show what you rendered inside of your error boundary
+		Dont cluster your entire app in them though, only use them when it makes sense
+	Useful debugging links
+		Error Boundaries: https://reactjs.org/docs/error-boundaries.html
+		Chrome Devtool Debugging: https://developers.google.com/web/tools/chrome-devtools/javascript/
+Components Deep Dive
+	A Better Project Structure
+		Render method should be lean and not contain too much jsx
+		State logic should be split up from main render logic
