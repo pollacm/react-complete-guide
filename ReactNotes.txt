@@ -522,3 +522,14 @@ Components Deep Dive
 	A Better Project Structure
 		Render method should be lean and not contain too much jsx
 		State logic should be split up from main render logic
+	Shorthand for returning jsx in component
+		const persons = (props) => (...); //dont need "return"
+		const persons = (props) => props.persons.map((person, index) => 
+			<Person 
+					key={person.id}
+					name={person.name} 
+					age={person.age} 
+					click={() => this.deletePersonHandler(index)}
+					changed={(event) => this.nameChangedHandler(event, person.id)}></Person>
+
+		);
