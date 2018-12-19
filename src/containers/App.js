@@ -12,6 +12,18 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    console.log('[App.js] Inside constructor', props);
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
 
   state = {
     persons: [
@@ -98,7 +110,7 @@ class App extends Component {
     //     color: 'black'
     //   } 
     // };
-
+    console.log('[App.js] inside render')
     let persons = null;
 
     if(this.state.showPersons) {
@@ -151,6 +163,7 @@ class App extends Component {
       // <StyleRoot>
       <div className="App">
         <Cockpit
+          appTitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={() => this.showPersonHandler()} />

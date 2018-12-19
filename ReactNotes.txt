@@ -533,3 +533,65 @@ Components Deep Dive
 					changed={(event) => this.nameChangedHandler(event, person.id)}></Person>
 
 		);
+Comparing stateful and stateless components
+	Stateless components 
+		should create these functional components whenever possible
+		have a narrow focus and a specific responsibility
+		CANNOT manage state
+		implemented by 
+			const xy = (props) => {...}
+		NO access to state
+		NO lifecycle hooks
+		Access props via "props"
+			props.xy
+		Use in all other cases than below
+	Stateful components (containers)
+		want to have as minimal of these as possible
+		it is super hard to track the state
+		root component of specific features could possibly be containers that manage state for those features
+		implemented by 
+			class XY extends Component
+		Access to state
+		Access to lifecycle hooks
+		Access state and props via "this"
+			this.state.XY
+			this.props.XY
+				this "props" is available when you extend Component for free.. the same way that state is available for free
+		Use ONLY if you need to manage State or access to lifecycle hooks
+	Component Lifecycle
+		Can define methods in a STATEFUL component which react will execute during lifecycle phases
+			constuctor
+			componentWillMount
+			componentWillReceiveProps
+			shouldComponentUpdate
+			componentWillUpdate
+			componentDidUpdate
+			componentDidCatch
+			componentDidMount
+			componentWillMount
+			render			
+		During creation, the following are executed (and in order)
+			constuctor is executed with the props
+				a default ES6 class feature
+				have to call super(props)					
+				may initialize state here
+				SHOULD set up state
+					Can do this here (older way) or if all you're doing is setting up state, can do it in the initialize (recommended)
+				SHOULD NOT cause side effects
+					calling out to a web service, etc
+					requests that come back and edit the state
+					could lead to a re-render of application and cause performance issues					
+			componentWillMount
+				defined by react and available because we extended react
+				exists for historic reasons
+				DO: Update state, last minute optimizations
+				DONT: Cause side effects				
+			render			
+				gives react an idea of what it should look like if it looked to real DOM and rendered.. if no change needs to be made it wont re-render. if it does it will
+				prepare and structure JSX
+				then renders each child component in the class
+			componentDidMount
+				DO: Cause side effects
+				DONT: Update state (triggers re-render)			
+	Component Creation: Lifecycles in action
+		Lifecycle hooks are usually located at or near the top of the class
