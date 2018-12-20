@@ -597,7 +597,7 @@ Comparing stateful and stateless components
 			Lifecycle hooks are usually located at or near the top of the class
 		componentWillUnmount()
 			gets executed right before a component is removed from the DOM
-		Components Lifecycle - Update (triggered by parent)
+		Components Lifecycle - Update (triggered by parent [outside])
 			componentWillReceiveProps (nextProps)
 				DO:
 					Sync state to props
@@ -610,17 +610,40 @@ Comparing stateful and stateless components
 					Decide whether to continue or not
 				DONT:
 					cause side effects
-		componentWillUpdate(nextProps, nextState)
-			DO:
-				sync state to props
-					could be better than doing it in componentWillReceiveProps, b/c you know the update is happening for sure
-			DONT:
-				cause side effects
-		render
-			prepare and structure your JSX code
-		Update Child Component Props
-		componentDidUpdate
-			DO:
-				cause side effects
-			DONT:
-				Update state (triggers re-render)
+			componentWillUpdate(nextProps, nextState)
+				DO:
+					sync state to props
+						could be better than doing it in componentWillReceiveProps, b/c you know the update is happening for sure
+				DONT:
+					cause side effects
+			render
+				prepare and structure your JSX code
+			Update Child Component Props
+			componentDidUpdate
+				DO:
+					cause side effects
+				DONT:
+					Update state (triggers re-render)
+		Component Lifecycle - Update (triggered by internal change) - only difference is that componentWillReceiveProps is missing
+			shouldComponentUpdate(nextProps, nextState)
+				may cancel updating process
+					careful though: this could cause your DOM to be in an incorrect state
+				DO:
+					Decide whether to continue or not
+				DONT:
+					cause side effects
+			componentWillUpdate(nextProps, nextState)
+				DO:
+					sync state to props
+						could be better than doing it in componentWillReceiveProps, b/c you know the update is happening for sure
+				DONT:
+					cause side effects
+			render
+				prepare and structure your JSX code
+			Update Child Component Props
+			componentDidUpdate
+				DO:
+					cause side effects
+				DONT:
+					Update state (triggers re-render)
+		Performance gains from Pure Components
