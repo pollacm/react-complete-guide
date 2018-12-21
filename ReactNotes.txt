@@ -685,7 +685,7 @@ Comparing stateful and stateless components
 					const withClassAlt = (WrappedComponent, className) => {
 						return (props) => (
 							<div className={className}>
-								<WrappedComponent />
+								<WrappedComponent {...props} />
 							</div>
 						)
 					}
@@ -698,3 +698,18 @@ Comparing stateful and stateless components
 				export default aux;
 			after react 16.2, this is a built in FRAGMENT
 				instead of using like <div> ... </div>, you can use <> ... </>
+		Passing unknown props
+			To const -> you pass these with the spread operator
+				<WrappedComponent {...props} />
+			to functions
+				const withClassAlt = (WrappedComponent, className) => {
+					return class extends Component {
+						render() {
+							return <div className={className}>
+							<WrappedComponent {...this.props} />
+							</div>
+						}
+					}
+				}
+
+				export default withClassAlt;
