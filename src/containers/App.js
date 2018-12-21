@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import classes from './App.css';
 import Person from '../components/Persons/Person/Person';
@@ -10,8 +10,10 @@ import Character from '../components/Char/Char';
 // import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass'
+import withClassAlt from '../hoc/withClassAlt'
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props){
     super(props);
     console.log('[App.js] Inside constructor', props);
@@ -25,11 +27,11 @@ class App extends Component {
     console.log('[App.js] Inside componentDidMount()');
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
-    return nextState.persons !== this.state.persons || 
-          nextState.showPersons !== this.state.showPersons;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
+  //   return nextState.persons !== this.state.persons || 
+  //         nextState.showPersons !== this.state.showPersons;
+  // }
 
   componentWillUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);      
@@ -175,7 +177,9 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-      <div className="App">
+      // <WithClass classes="App">
+      <>
+       {/* <div className="App"> */}
         <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         <Cockpit
           appTitle={this.props.title}
@@ -220,10 +224,12 @@ class App extends Component {
           username={this.state.username} />
         <UserOutput
           username={this.state.username} />*/}
-      </div>       
+      {/* </div>        */}
+      {/* </WithClass> */}
+      </>
     );
   }
 }
 
 // export default Radium(App);
-export default App;
+export default withClassAlt(App, "App");

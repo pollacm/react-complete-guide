@@ -651,3 +651,50 @@ Comparing stateful and stateless components
 				React needs to look to see whether it needs to re-render
 				This can be a performance issue for larger applications
 			Don't mistake this for react re-rendering the actual DOM
+			shouldComponentUpdate(nextProps, nextState)
+				Doing a comparison of every object in the props against nextProps (or state to nextState) for equality doesn't have to be done
+					shouldComponentUpdate(nextProps, nextState) {
+					  return nextProps.persons !== this.props.persons || 
+					  nextProps.changed !== this.props.changed ||
+					  nextProps.clicked !== this.props.clicked;
+					}
+					Instead ... you can inherit from PureComponent instead of Component b/c it has the type of above check already built in
+						Then this type of check will happen automatically
+			Should only use pure components when you know that updates are not always required
+				Pure components could prevent child components from updating as well
+		How React Updates the App and Component Tree
+			If a parent component only passes props/state down to child components that should only be updated when those values change, then it makes sense to have the parent component be a pure component
+		Understanding React's DOM Updating Strategy
+			render being called does NOT always render to the real DOM
+				It is more of a suggestion as to what the html should look like at the end
+				Use shouldComponentUpdate to stop unneccessary render calls
+			compares virtual DOMs
+				old virtual dom vs re-rendered virtual DOM
+					this comparison is faster than the real DOM
+					checks for differences
+						If they are found, it re-renders the DOM in the places that changes were detected
+						If none were found, the don't touch the real DOM
+		Higher Order Components (hoc)
+			normal react components that are designed to wrap other components to add functionality
+			If these classes only add functionality and do not return direct JSX, then they start with a lower-case character
+				they also wrap the export default declaration
+					export default withClassAlt(App);
+				Example of the wrapping class
+					import React from 'react';
+
+					const withClassAlt = (WrappedComponent, className) => {
+						return (props) => (
+							<div className={className}>
+								<WrappedComponent />
+							</div>
+						)
+					}
+
+					export default withClassAlt;
+		Aux
+			removed the need for an outer level container html element for components if it's not needed
+				const aux = (props) => props.children;
+
+				export default aux;
+			after react 16.2, this is a built in FRAGMENT
+				instead of using like <div> ... </div>, you can use <> ... </>
