@@ -647,3 +647,7 @@ Comparing stateful and stateless components
 				DONT:
 					Update state (triggers re-render)
 		Performance gains from Pure Components
+			React will sometimes go through all of the render stages even if no changes were actually made
+				React needs to look to see whether it needs to re-render
+				This can be a performance issue for larger applications
+			Don't mistake this for react re-rendering the actual DOM
