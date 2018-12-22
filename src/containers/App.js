@@ -50,7 +50,8 @@ class App extends PureComponent {
     otherState: 'some other value',
     username: 'Jeff',
     showPersons: false,
-    characters: ''
+    characters: '',
+    toggleClicked: 0
   }
 
   switchNameHandler = (newName) => {
@@ -88,9 +89,17 @@ class App extends PureComponent {
   }
 
   showPersonHandler = () => {
-    this.setState({
-      showPersons: !this.state.showPersons
+    this.setState( (prevState, props) => {
+      return {
+        showPersons: !this.state.showPersons,
+        toggleClicked: prevState.toggleClicked + 1
+      }
     });
+
+    // this.setState({
+    //   showPersons: !this.state.showPersons,
+    //   toggleClicked: this.state.toggleClicked + 1
+    // });
   }
 
   userInputChangeHandler = (event) => {
@@ -230,6 +239,7 @@ class App extends PureComponent {
     );
   }
 }
+
 
 // export default Radium(App);
 export default withClassAlt(App, "App");

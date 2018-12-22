@@ -3,6 +3,7 @@ import './Person.css';
 // import Radium from 'radium';
 import WithClass from '../../../hoc/WithClass';
 import withClassAlt from '../../../hoc/withClassAlt';
+import PropTypes from 'prop-types';
 
 class Person extends Component{
     constructor(props){
@@ -56,4 +57,12 @@ class Person extends Component{
 
 // export default Radium(person);
 // export default person;
+
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
 export default withClassAlt(Person, "Person");

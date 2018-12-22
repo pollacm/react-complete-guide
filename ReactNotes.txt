@@ -713,3 +713,29 @@ Comparing stateful and stateless components
 				}
 
 				export default withClassAlt;
+		Using SetState Correctly
+			always update state through immutable objects
+			set state is executed async
+				you cant rely on this.state being called in the set state to be correct, if a certain state element is set in another place in your app
+				There is a better way
+				this.setState( (prevState, props) => {
+					return {
+						showPersons: !doesShow,
+						toggleClicked: prevState.toggleClicked + 1
+					}				
+				}
+				This ensures that the current version of the object/variable is the latest version
+		Validating props
+			can restrict the types and values you receive for your props
+			there is another package for this [Does NOT work in functional components]
+				npm install --save prop-types
+					import PropTypes from 'prop-types';
+					below your class definition, right above your export, add
+						{YourObject}.propTypes = {
+							click: PropTypes.func,
+							name: PropTypes.string,
+							age: PropTypes.number,
+							changed: PropTypes.func
+						}
+		More on PropTypes
+			https://reactjs.org/docs/typechecking-with-proptypes.html
