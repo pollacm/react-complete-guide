@@ -739,3 +739,45 @@ Comparing stateful and stateless components
 						}
 		More on PropTypes
 			https://reactjs.org/docs/typechecking-with-proptypes.html
+		Using Referencing "ref"
+			adding a special property to your html elements that will allow access in the js methods
+			Only available in stateful components
+			<input 
+				ref={(inp) => {this.inputElement = inp}}
+				type="text" 
+				onChange={this.props.changed} 
+				value={this.props.name} />
+				this.inputElement is available after render
+			To interact with the element then you just do
+				this.inputElement ...
+			these should be used with care.. should not be a shortcut for being lazy
+				usually for controlling focus or media playback. NOT for styling etc
+				
+			UPDATED inn 16.3
+				in constructor Add
+					this.inputElement = React.createRef(); //inputElement is whatever you want your element to be named
+				on the element, you would then..
+					ref={this.inputElement}
+				to interact with the element you do..
+					if(this.props.position === 0){
+				this.inputElement.current. ...
+				
+				Also adds
+					ref ability to mapped elements of a parent.. you can then call functions on a child 
+					unless.. that child component is wrapped by a higher order component..
+					there is a fix though called a forward ref
+					const withClassAlt = (WrappedComponent, className) => {
+						const WithClassAlt = class extends Component {
+							render() {
+								return <div className={className}>
+								<WrappedComponent ref={this.props.forwardedRef} {...this.props} />
+								</div>
+							}
+						}
+
+						return React.forwardRef((props, ref) => {
+							return <WithClassAlt {...props} forwardedRef={ref} />
+						});
+					}
+					Again only need these when your component is wrapped by a higher level component
+		Context API
