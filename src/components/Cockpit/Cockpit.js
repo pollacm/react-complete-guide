@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Cockpit.css';
 import Aux from '../../hoc/Auxil';
+import AuthContext from '../../containers/App'
 
 var cockpit = (props) => {
     const assignedClasses = []; //red bold
@@ -24,8 +25,9 @@ var cockpit = (props) => {
             <button 
                 className={btnClass} 
                 onClick={props.clicked}>Show Person</button> 
+            <button onClick={props.login}>Log in</button>
         </>
     )
 };
 
-export default cockpit;
+export default React.memo(cockpit);

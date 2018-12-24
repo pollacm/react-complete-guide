@@ -13,6 +13,12 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass'
 import withClassAlt from '../hoc/withClassAlt'
 
+// export const AuthContext = React.createContext(false);
+export const AuthContext = React.createContext({
+  isAuth: false,
+  toggleAuth: () => {}
+});
+
 class App extends PureComponent {
   constructor(props){
     super(props);
@@ -40,6 +46,15 @@ class App extends PureComponent {
   componentDidUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside componentDidUpdate', nextProps, nextState);      
   }
+  
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('[UPDATE App.js] Inside getDerivedStateFromProps', nextProps, prevState);  
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate() {
+    console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate');  
+  }
 
   state = {
     persons: [
@@ -51,7 +66,8 @@ class App extends PureComponent {
     username: 'Jeff',
     showPersons: false,
     characters: '',
-    toggleClicked: 0
+    toggleClicked: 0,
+    authenticated: false
   }
 
   switchNameHandler = (newName) => {
@@ -63,6 +79,10 @@ class App extends PureComponent {
         { id: '9846',   name: 'Stephanie', age: 27 },
 
     ]});
+  }
+
+  loginHandler = () => {
+    this.setState({authenticated: true});
   }
 
   nameChangedHandler = (event, id) => {
@@ -144,7 +164,7 @@ class App extends PureComponent {
           <Persons 
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler}  />
+            changed={this.nameChangedHandler} />
             
           {/* {this.state.persons.map((person, index) => {
             return <Person 
@@ -194,8 +214,11 @@ class App extends PureComponent {
           appTitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
+          login={this.loginHandler}
           clicked={() => this.showPersonHandler()} />
-          {persons}
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>          
         {/* <h1>This is a react app!!!</h1>
         <p className={classes.join(' ')}>This is really working</p>
         {/* <input type="text" onChange={this.textLengthChangeHandler} value={this.state.characters}/>

@@ -780,4 +780,62 @@ Comparing stateful and stateless components
 						});
 					}
 					Again only need these when your component is wrapped by a higher level component
-		Context API
+		Context API (16.3)
+			tool for passing global state around in your app
+				i.e. - passing around logged in state globally
+			to create, in the top level component, OUTSIDE of the class at the top
+				export const AuthContext = React.createContext(false);
+			then where you want to use it, wrap in the provider, wrapping all the lower level consumer components
+				<AuthContext.Provider value={this.state.authenticated}>
+					{persons}
+				</AuthContext.Provider>          
+			then in the class where you want to use, import it 
+				import {AuthContext} from '../../../containers/App'
+			then call the consumer element using a method to extract the object
+				<AuthContext.Consumer>
+                    {auth => auth ? <p>I am authenticated!</p> : null}
+                </AuthContext.Consumer>   
+		Context API (16.6)
+			you have access to a static version in your child classes
+				you create a new component to house your authentication logic
+					import React from 'react'
+					
+					export default React.createConext({
+						isAuth: false,
+						toggleAuth: () => {}
+					});
+				In container, import the context
+					import AuthContext from './auth-context'
+				you still need to import it into child components
+					import {AuthContext} from '../../../containers/App'
+				then within your class, you declare the static authcontext
+					static contextType = AuthContext;
+				To use inside of render
+					<button onClick={this.context.toggleAuth}>
+						{this.context.isAuth ? 'Logout' : 'Login'}
+					</button>
+		Lifecycle hooks (16.6)
+			should try to avoid
+				componentWillMount
+				componentWillUpdate
+				componentWillReceiveProps
+			these are discouraged because they are often used incorrectly and are not that useful
+			React offers 2 new ones
+				static getDerivedStateFromProps(nextProps, prevState)
+					whenever you need to bring state and props in sync
+					executes whenever your props are updated
+					state should rarely be coupled to props
+				getSnapshotBeforeUpdate()
+					gets a snapshot of the DOM right before the DOM updates
+					sometimes you get states when you receive new props and you want it to work with state	
+					for example,
+						saving the current scroll state of the user to put them back in the previous position
+		The "memo" method
+			how we can effectively re-render our components (PureComponents)
+			could only do this on functional based components though
+			with 16.6, you can also optimize functional components
+				you wrap your component with 
+					export default React.memo(cockpit);
+			Does not mean you have to wrap all components with the memo function
+Course Project
+	
