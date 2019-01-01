@@ -1039,6 +1039,32 @@ More on lifecycle hooks
 Folder Structure
 	Typcially if a component handles other components they could be considered containers because other components are contained within them
 	Burger Builder is essentially just wrapped with Layout, making layout a higher order component
+	
+To store orders, we will use google firebase
+	Make sure to select "RealTime database"
+	https://firebase.google.com/
+	Click "Go to console"
+	Name project, then "Create project"
+	Will automatically give you a rest api db, and a mongo-like db
+	In the database, will set the read/write rules to true, since we havent created any authentication for the project yet
+		DONT DO THIS IN A REAL LIFE APPLICATION, just are doing it for the sake of the demo
+	Publish those updated rules
+Set up axios
+	install package
+		npm install --save axios
+	restart dev server
+	create an axios-orders.js file in the src folder and create it
+		import axios from 'axios';
+
+		const instance = axios.create({
+			baseURL: 'https://react-my-burger-6d6c5.firebaseio.com'
+		});
+
+		export default instance;
+	firebase db will just add an additional node for things building onto the url
+		i.e.
+			a post to https://react-my-burger-6d6c5.firebaseio.com/orders.json sending an order
+				For firebase, you have to add ".json" to your node name
 -------------------------------------------
 -------------------------------------------
 -------------------------------------------
