@@ -1065,6 +1065,7 @@ Set up axios
 		i.e.
 			a post to https://react-my-burger-6d6c5.firebaseio.com/orders.json sending an order
 				For firebase, you have to add ".json" to your node name
+	https://console.firebase.google.com/project/react-my-burger-6d6c5/database/react-my-burger-6d6c5/data/orders
 Custom spinners
 	https://projects.lukehaas.me/css-loaders/
 	can adjust the back color and front color and then just use the source
