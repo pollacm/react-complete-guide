@@ -1065,6 +1065,22 @@ Set up axios
 		i.e.
 			a post to https://react-my-burger-6d6c5.firebaseio.com/orders.json sending an order
 				For firebase, you have to add ".json" to your node name
+Custom spinners
+	https://projects.lukehaas.me/css-loaders/
+	can adjust the back color and front color and then just use the source
+	take that source responsible for that spinner, and create a css class. 
+	your app just needs to have a div with the "loader" class with "Loading..." in the div
+When swapping out the order info for a spinner, it doesn't actually update
+	this is because we have 
+		shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.show !== this.props.show;
+    }
+	Where the update is only being allowed when the show property is different. We need to change this to
+	
+	**Always check shouldComponentUpdate or other lifecycle hooks if things aren't showing as expected
+		shouldComponentUpdate(nextProps, nextState) {
+			return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+		}
 -------------------------------------------
 -------------------------------------------
 -------------------------------------------
