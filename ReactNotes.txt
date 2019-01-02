@@ -933,6 +933,12 @@ Interceptors
 	To remove an interceptor
 		var myInterceptor = axios.interceptors.request.use(function () {/*...*/});
 		axios.interceptors.request.eject(myInterceptor);
+	Shorthand for returning is as follows
+		axios.interceptors.response.use(res => res, error => {
+                this.setState({
+                    error: error
+                })
+            });
 Setting default configuration for axios
 	If we wanted to turn axios.get('http://jsonplaceholder.typicode.com/posts') to axios.get('/posts'), we could accomplish this
 	Also do this near or at the top level of your application
@@ -1082,6 +1088,8 @@ When swapping out the order info for a spinner, it doesn't actually update
 		shouldComponentUpdate(nextProps, nextState) {
 			return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
 		}
+Use lower case starting character for higher order components that are going to wrap other's exports
+
 -------------------------------------------
 -------------------------------------------
 -------------------------------------------
