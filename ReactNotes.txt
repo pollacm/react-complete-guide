@@ -1089,7 +1089,9 @@ When swapping out the order info for a spinner, it doesn't actually update
 			return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
 		}
 Use lower case starting character for higher order components that are going to wrap other's exports
-
+When using higher order components, you can pass additional parameters plus the wrapped component
+Be concious of the life cycle hooks and when things get called in proportion to other things, especially when it comes to wrapping components
+Be sure to create a catch block for each axios call..even if you have a wrapping component
 -------------------------------------------
 -------------------------------------------
 -------------------------------------------
