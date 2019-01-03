@@ -852,6 +852,7 @@ Course Project
 		1) Component Tree / Component Structure	 			
 		2) Application State (Data)
 		3) Components vs Containers
+Routing
 		
 -------------------------------------------
 -------------------------------------------
@@ -1092,6 +1093,46 @@ Use lower case starting character for higher order components that are going to 
 When using higher order components, you can pass additional parameters plus the wrapped component
 Be concious of the life cycle hooks and when things get called in proportion to other things, especially when it comes to wrapping components
 Be sure to create a catch block for each axios call..even if you have a wrapping component
+Interceptor cleanup for our application
+	our withErrorHandler has 2 interceptors in componentWillMount
+		componentWillMount() {
+            axios.interceptors.request.use(req => {
+                this.setState({
+                    error: null
+                })
+
+                return req;
+            });
+
+            axios.interceptors.response.use(res => res, error => {
+                this.setState({
+                    error: error
+                })
+            });
+        }
+	The problem with them here is that if we add more than one withErrorHandler, we will add multiple interceptors redundantly, causing memory leaks
+	We should remove these interceptors when the components get unmounted
+	For this we need to store our interceptors in properties of the class
+			componentWillMount() {
+				this.reqInterceptor = axios.interceptors.request.use(req => {
+					this.setState({
+						error: null
+					})
+
+					return req;
+				});
+
+				this.resInterceptor = axios.interceptors.response.use(res => res, error => {
+					this.setState({
+						error: error
+					})
+				});
+			}
+	Then you can eject them
+		componentWillUnmount() {
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
+        }
 -------------------------------------------
 -------------------------------------------
 -------------------------------------------
